@@ -1,0 +1,464 @@
+@import './reset';
+@import './base';
+@import './palette';
+@import './fonts';
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url("../assets/bg.png");
+  background-size: auto;
+}
+
+main {
+  width: 910px;
+  min-width: 320px;
+  height: 100vh;
+  min-height: 640px;
+  margin: 0 auto;
+  overflow-y: hidden;
+}
+
+.head {
+  display: flex;
+  justify-content: center;
+  margin-top: calc(20px + 40 * ((100vh - 640px) / (1080 - 640)));
+  margin-bottom: calc(40px + 40 * ((100vh - 640px) / (1080 - 640)));
+}
+
+.head .cloudy {
+  width: 114px;
+  background-image: url("../assets/weather-icon-cloudy.png");
+}
+
+.head .rainy {
+  width: 100px;
+  background-image: url("../assets/weather-icon-rainy.png");
+}
+
+.head .sunny {
+  width: 88px;
+  background-image: url("../assets/weather-icon-sunny.png");
+}
+
+.head .icon {
+  margin-right: 30px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 88px;
+}
+
+.head .current-date {
+  display: flex;
+  flex-direction: column;
+}
+
+.head .current-date p {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 28px;
+  color: $color1;
+  display: inline-block;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.head .current-date span {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 200;
+  font-size: 14px;
+  color: $color1;
+  text-transform: uppercase;
+}
+
+.current-weather {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 38px;
+}
+
+.current-weather .temperature {
+  position: relative;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 200;
+  font-size: calc(230px + 120 * ((100vh - 640px) / (1080 - 640)));
+  line-height: 1;
+  color: $color1;
+  margin-bottom: calc(10px + 80 * ((100vh - 640px) / (1080 - 640)));
+}
+
+.current-weather .temperature::after {
+  position: absolute;
+  top: 53px;
+  right: -70px;
+  content: '';
+  display: inline-block;
+  width: 37px;
+  height: 41px;
+  border: solid 5px $color1;
+  border-radius: 50%;
+}
+
+.current-weather .meta span {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 200;
+  font-size: 19px;
+  color: $color1;
+  display: inline-flex;
+  align-items: flex-start;
+}
+
+.current-weather .meta span:first-child {
+  margin-right: 81px;
+}
+
+.current-weather .meta .rainy::before {
+  content: '';
+  display: inline-block;
+  width: 26px;
+  height: 26px;
+  background-image: url("../assets/rainy.png");
+  margin-right: 11px;
+}
+
+.current-weather .meta .humidity::before {
+  content: '';
+  display: inline-block;
+  width: 19px;
+  height: 28px;
+  background-image: url("../assets/humidity.png");
+  margin-right: 11px;
+}
+
+.filter {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.filter .checkbox {
+  position: relative;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  text-transform: uppercase;
+  color: $color1;
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.filter .checkbox:hover {
+  cursor: pointer;
+}
+
+.filter .checkbox::after {
+  content: '';
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  border: solid 1px $color1;
+  border-radius: 3px;
+  margin-left: 14px;
+}
+
+.filter .checkbox.selected::before {
+  content: '✓';
+  position: absolute;
+  right: 7px;
+}
+
+.filter .checkbox.blocked {
+  cursor: initial;
+}
+
+.filter .custom-input {
+  margin-bottom: 26px;
+}
+
+.filter .custom-input label {
+  display: inline-block;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  text-transform: uppercase;
+  color: $color1;
+  margin-right: 14px;
+}
+
+.filter .custom-input input {
+  border-bottom: solid 1px $color1;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  background: transparent;
+  width: 40px;
+  outline: none;
+  color: $color1;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  text-align: center;
+}
+
+.filter button {
+  background-color: $color2;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 1px;
+  color: $color1;
+  text-transform: uppercase;
+}
+
+.filter button:hover {
+  cursor: pointer;
+  background-color: $color3;
+}
+
+.filter button:disabled {
+  opacity: 0.3;
+}
+
+.filter button:disabled:hover {
+  cursor: initial;
+  background-color: $color2;
+}
+
+.message {
+  font-family: Roboto, sans-serif;
+  font-weight: 400;
+  font-size: 28px;
+  color: $color1;
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
+.forecast {
+  display: flex;
+  margin-bottom: 40px;
+}
+
+.forecast .day {
+  position: relative;
+  width: 130px;
+  height: 204px;
+  background-color: $color4;
+  color: $color1;
+  padding-top: 35px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $color5;
+  }
+}
+
+.forecast .day.selected {
+  background-color: $color5;
+}
+
+.forecast .day p {
+  display: inline-block;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  margin-bottom: 90px;
+}
+
+.forecast .day span::after {
+  margin-left: 5px;
+  transform: translateY(-15px);
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 6px;
+  border: solid 1px $color1;
+  border-radius: 50%;
+}
+
+.forecast .day span {
+  position: relative;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 200;
+  font-size: 30px;
+}
+
+.forecast .day.cloudy::before {
+  position: absolute;
+  top: 86px;
+  content: '';
+  display: block;
+  width: 62px;
+  height: 37px;
+  background-image: url("../assets/weather-icon-cloudy.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.forecast .day.rainy::before {
+  position: absolute;
+  top: 86px;
+  content: '';
+  display: block;
+  width: 43px;
+  height: 37px;
+  background-image: url("../assets/weather-icon-rainy.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.forecast .day.sunny::before {
+  position: absolute;
+  top: 86px;
+  content: '';
+  display: block;
+  width: 37px;
+  height: 37px;
+  background-image: url("../assets/weather-icon-sunny.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+$preloaderSize: 200px;
+$cutWidth: 200px / 4.14;
+$borderRadius: 20px;
+$animation: 500ms;
+$animationSpeed: 1000ms;
+
+.pswp__preloader__icn {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  opacity: 0.75;
+  width: $preloaderSize;
+  height: $preloaderSize;
+  -webkit-animation: clockwise $animation linear infinite;
+  animation: clockwise $animation linear infinite;
+}
+
+.pswp__preloader__cut {
+  position: relative;
+  width: $cutWidth;
+  height: $preloaderSize;
+  overflow: hidden;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.pswp__preloader__donut--fake {
+  box-sizing: border-box;
+
+  width: $preloaderSize;
+  height: $preloaderSize;
+
+
+  border: $borderRadius solid red;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  background: none;
+  margin: 0;
+}
+
+.pswp__preloader__donut {
+  box-sizing: border-box;
+
+  width: $preloaderSize;
+  height: $preloaderSize;
+
+
+  border: $borderRadius solid #FFF;
+  border-radius: 50%;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  background: none;
+  margin: 0;
+
+  -webkit-animation: donut-rotate $animationSpeed cubic-bezier(.4, 0, .22, 1) infinite;
+  animation: donut-rotate $animationSpeed cubic-bezier(.4, 0, .22, 1) infinite;
+
+}
+
+@-webkit-keyframes clockwise {
+  0% {
+    -webkit-transform: rotate(0deg)
+  };
+
+  100% {
+    -webkit-transform: rotate(360deg)
+  };
+}
+
+@keyframes clockwise {
+  0% {
+    transform: rotate(0deg)
+  };
+
+  100% {
+    transform: rotate(360deg)
+  };
+}
+
+@-webkit-keyframes donut-rotate {
+  0% {
+    -webkit-transform: rotate(0)
+  };
+
+  50% {
+    -webkit-transform: rotate(-140deg)
+  };
+
+  100% {
+    -webkit-transform: rotate(0)
+  };
+}
+
+@keyframes donut-rotate {
+  0% {
+    transform: rotate(0)
+  };
+
+  50% {
+    transform: rotate(-140deg)
+  };
+
+  100% {
+    transform: rotate(0)
+  };
+}

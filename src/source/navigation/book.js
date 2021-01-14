@@ -1,4 +1,4 @@
-// Book
+// Root not '/' Because used gh-pages
 export const book = Object.freeze({
-  root: '/',
+  root: '/React-Redux-Project-1',
 });
